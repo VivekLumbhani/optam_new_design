@@ -18,6 +18,7 @@ import {
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { MeshStandardMaterial } from "three";
+import My3DModel from "./MyModel";
 
 const metrics = [
   {
@@ -99,69 +100,7 @@ export default function MetricsDashboard() {
       </div>
 
       {/* Right Side: 3D Shape Viewer */}
-      <div className="bg-white rounded-xl shadow-lg p-6 space-y-4">
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-semibold">Material View</h2>
-          <select
-            className="border rounded-md px-2 py-1 text-sm"
-            value={shape}
-            onChange={(e) => setShape(e.target.value)}
-          >
-            <option value="Box">Square</option>
-            <option value="Sphere">Circle</option>
-            <option value="Rectangle">Rectangle</option>
-            <option value="Cone">Pyramid</option>
-          </select>
-        </div>
-
-        <div className="h-[250px] w-full">
-          <Canvas camera={{ position: [3, 3, 3] }}>
-            <ambientLight intensity={0.4} />
-            <directionalLight position={[5, 5, 5]} />
-            <OrbitControls enableZoom={true} />
-
-            {shape === "Box" && (
-              <mesh>
-                <boxGeometry args={[1, 1, 1]} />
-                <meshStandardMaterial color="#FF3147" />
-              </mesh>
-            )}
-
-            {shape === "Sphere" && (
-              <mesh>
-                <sphereGeometry args={[0.75, 32, 32]} />
-                <meshStandardMaterial color="#FF3147" />
-              </mesh>
-            )}
-
-            {shape === "Rectangle" && (
-              <mesh>
-                <boxGeometry args={[1.5, 1, 0.5]} />
-                <meshStandardMaterial color="#FF3147" />
-              </mesh>
-            )}
-
-            {shape === "Cone" && (
-              <mesh>
-                <coneGeometry args={[1, 1.5, 4]} />
-                <meshStandardMaterial color="#FF3147" />
-              </mesh>
-            )}
-          </Canvas>
-        </div>
-
-        <div className="space-y-2 text-sm">
-          <p>
-            <strong>Material Name:</strong> Titanium Alloy
-          </p>
-          <p>
-            <strong>Material ID:</strong> MAT-4872
-          </p>
-          <p>
-            <strong>Porosity:</strong> 3.7%
-          </p>
-        </div>
-      </div>
+      <My3DModel/>
     </div>
   );
 }
